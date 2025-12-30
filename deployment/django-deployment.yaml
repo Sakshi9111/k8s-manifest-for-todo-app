@@ -16,11 +16,11 @@ spec:
     spec:
       initContainers:
 #      - name: wait-for-db
-#        image: todo:36
+#        image: todo:37
 #        imagePullPolicy: IfNotPresent
 #        command: ['sh', '-c', 'until nc -z postgres-service 5432; do echo waiting for postgres; sleep 2; done;']
       - name: migrate
-        image: todo:36
+        image: todo:37
         imagePullPolicy: Always
         command: ['python', 'manage.py', 'migrate']
         envFrom:
@@ -28,7 +28,7 @@ spec:
             name: django-secret
       containers:
       - name: django
-        image: todo:36
+        image: todo:37
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
