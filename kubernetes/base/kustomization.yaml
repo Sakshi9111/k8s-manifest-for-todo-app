@@ -1,13 +1,31 @@
+# kubernetes/base/kustomization.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+namespace: todo-app
+
 resources:
+  # Namespace
   - namespace.yaml
-  - postgres-secret.yaml
-  - django-secret.yaml
+  
+  # Secrets (External Secrets)
+  - secret-store-django.yaml
+  - external-secret-django.yaml
+  - external-secret-db.yaml
+  
+  # Storage (PV and PVC)
   - postgres-pv.yaml
   - postgres-pvc.yaml
+  
+  # Database
   - postgres-deployment.yaml
   - postgres-service.yaml
+  
+  # Django Application
   - django-deployment.yaml
   - django-service.yaml
+  
+  # Optional resources
+  - ingress.yaml
+  # - configmap.yaml
+  # - networkpolicy.yaml
