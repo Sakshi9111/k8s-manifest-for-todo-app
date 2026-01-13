@@ -1,0 +1,10 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequireResourceLimits
+metadata:
+  name: require-limits
+spec:
+  enforcementAction: dryrun  # Change to "deny" for enforcement
+  match:
+    kinds:
+      - apiGroups: ["apps"]
+        kinds: ["Deployment"]

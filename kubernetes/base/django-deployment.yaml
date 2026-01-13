@@ -20,9 +20,9 @@ spec:
         command: ['python', 'manage.py', 'migrate']
         envFrom:
         - secretRef:
-            name: django-secrets  # Changed: added 's'
+            name: django-secret  # Changed: added 's'
         - secretRef:
-            name: db-secrets      # Add DB credentials
+            name: postgres-secret     # Add DB credentials
       containers:
       - name: django
         image: 98543218/todo-web:latest
@@ -31,9 +31,9 @@ spec:
         - containerPort: 8000
         envFrom:
         - secretRef:
-            name: django-secrets  # Changed: added 's'
+            name: django-secret  # Changed: added 's'
         - secretRef:
-            name: db-secrets      # Add DB credentials
+            name: postgres-secret      # Add DB credentials
         command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
         livenessProbe:
           httpGet:
