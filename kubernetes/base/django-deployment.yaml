@@ -13,28 +13,25 @@ spec:
       labels:
         app: django-app
     spec:
-      initContainers:
-      - name: migrate
-        image: 98543218/todo-web:latest
-        imagePullPolicy: Always
-        command: ['python', 'manage.py', 'migrate']
-        envFrom:
-        - secretRef:
-            name: django-secret  # Changed: added 's'
-        - secretRef:
-            name: postgres-secret     # Add DB credentials
       containers:
       - name: django
         image: 98543218/todo-web:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
+        command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
         envFrom:
         - secretRef:
-            name: django-secret  # Changed: added 's'
+            name: django-secrets
         - secretRef:
-            name: postgres-secret      # Add DB credentials
-        command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+            name: postgres-secret
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
         livenessProbe:
           httpGet:
             path: /
@@ -47,3 +44,4 @@ spec:
             port: 8000
           initialDelaySeconds: 10
           periodSeconds: 5
+
