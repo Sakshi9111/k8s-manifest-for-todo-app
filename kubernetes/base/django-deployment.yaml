@@ -22,7 +22,7 @@ spec:
         command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
         envFrom:
         - secretRef:
-            name: django-secrets
+            name: django-secret
         - secretRef:
             name: postgres-secret
         resources:
