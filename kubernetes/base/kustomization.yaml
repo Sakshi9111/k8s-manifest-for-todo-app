@@ -6,12 +6,12 @@ namespace: todo-app
 
 resources:
   # Namespace
-  - namespace.yaml
+  #  - namespace.yaml
   
   # Secrets (External Secrets)
-  - secret-store-django.yaml
-  - external-secret-django.yaml
-  - external-secret-db.yaml
+  # - secret-store-django.yaml
+  #- external-secret-django.yaml
+  #- external-secret-db.yaml
   
   # Storage (PV and PVC)
   - postgres-pv.yaml
