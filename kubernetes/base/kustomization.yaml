@@ -33,4 +33,4 @@ resources:
   #
   
     #HPA
-    # - HPA.yaml
+   - HPA.yaml
