@@ -7,7 +7,7 @@
 - **Docker**
 - **kubectl**
 - **Kustomize**
-- **Ingress Controller (NGINX / Traefik / Cloud-specific)**
+- **Ingress Controller (NGINX)**
 - **Git & GitHub**
 
 ---
