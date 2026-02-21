@@ -33,6 +33,7 @@ cd k8s-manifest-for-todo-app/kubernetes/base/
 
 
 ---
+```
 
 ## 🧩 Components Overview
 
