@@ -109,14 +109,13 @@ kubectl get all -n <namespace-name>
 
 ### ⚙️ Prerequisites
 ```bash
-Kubernetes cluster (v1.20+ recommended)
-
-kubectl
-
-Kustomize (kubectl built-in)
-
-Ingress Controller (e.g., NGINX)
-
-Persistent volume support
+ - Kubernetes cluster (v1.20+ recommended)
+ - kubectl
+ - Kustomize (kubectl built-in)
+ - Ingress Controller (e.g., NGINX)
+ - Persistent volume support
 
 ```
+
+### 🛠 Notes
+``` bash 
