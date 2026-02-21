@@ -36,7 +36,7 @@ cd k8s-manifest-for-todo-app/kubernetes/base/
 
 ### 🔹 Namespace
 - **`namespace.yaml`**
-  - Creates a dedicated Kubernetes namespace for the application resources.
+  - Creates a dedicated Kubernetes namespace for the application resources. [todo-app]
 
 ---
 
@@ -97,6 +97,26 @@ cd k8s-manifest-for-todo-app/kubernetes/base/
 
 ## 🚀 Deployment Instructions
 
-### 1️⃣ Create the namespace
+### 1️⃣ After Creating namespace Deploy using Kustomize
 ```bash
-kubectl apply -f namespace.yaml
+kubectl apply -k .
+```
+
+### 2️⃣ Verify resources
+```bash
+kubectl get all -n <namespace-name>
+```
+
+### ⚙️ Prerequisites
+```bash
+Kubernetes cluster (v1.20+ recommended)
+
+kubectl
+
+Kustomize (kubectl built-in)
+
+Ingress Controller (e.g., NGINX)
+
+Persistent volume support
+
+```
