@@ -1,6 +1,16 @@
 
 ---
 
+This application is deployed on Kubernetes using Kustomize, following cloud-native best practices:
+    - Stateless Django application
+    - Managed database persistence
+    - Internal caching layer
+    - Horizontal autoscaling
+    - Ingress-based external access
+
+## High Level Architecure Diagram 
+![alt text](image.png)
+
 ## 🛠️ Technologies Used
 
 - **Kubernetes**
@@ -119,3 +129,8 @@ kubectl get all -n <namespace-name>
 
 ### 🛠 Notes
 ``` bash 
+- Secrets (DB credentials, Django secret key) should be stored using Kubernetes Secrets
+- For production:
+    Enable TLS
+    Use managed storage classes
+    Configure proper resource limits
