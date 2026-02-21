@@ -30,9 +30,6 @@ Before deploying this project, ensure you have:
 ```bash
 git clone https://github.com/Sakshi9111/k8s-manifest-for-todo-app.git
 cd k8s-manifest-for-todo-app/kubernetes/base/
-
-
----
 ```
 
 ## 🧩 Components Overview
