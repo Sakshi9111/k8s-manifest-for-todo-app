@@ -3,8 +3,8 @@ kind: Service
 metadata:
   name: django-service
   namespace: todo-app
-  annotations:
-    cloud.google.com/backend-config: '{"default": "django-backendconfig"}'
+    #  annotations:
+    #cloud.google.com/backend-config: '{"default": "django-backendconfig"}'
 spec:
   type: NodePort
   selector:

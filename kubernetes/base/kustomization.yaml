@@ -24,7 +24,6 @@ resources:
   # Django Application
   - django-deployment.yaml
   - django-service.yaml
-  - backendconfig.yaml
   # Optional resources
   - ingress.yaml
   # - configmap.yaml
