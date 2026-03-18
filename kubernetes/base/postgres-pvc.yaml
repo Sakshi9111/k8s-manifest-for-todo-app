@@ -1,12 +1,12 @@
-# postgres-pvc.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: postgres-pvc
+  name: postgres-storage
   namespace: todo-app
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: standard-rwo    # GKE's default SSD storage class
   resources:
     requests:
-      storage: 5Gi
+      storage: 10Gi

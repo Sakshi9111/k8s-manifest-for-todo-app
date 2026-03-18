@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-app
+  namespace: todo-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: django-app
+  template:
+    metadata:
+      labels:
+        app: django-app
+      annotations:
+        # Tell Vault Agent Injector to activate for this pod
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: "django-app"
+        vault.hashicorp.com/agent-inject-status: "update"
+
+        # Point to your secret path in Vault
+        vault.hashicorp.com/agent-inject-secret-config: "secret/data/django-app/config"
+
+        # Render secrets as shell exports into /vault/secrets/config
+        vault.hashicorp.com/agent-inject-template-config: |
+          {{- with secret "secret/data/django-app/config" -}}
+          export SECRET_KEY="{{ .Data.data.SECRET_KEY }}"
+          export DATABASE_ENGINE="{{ .Data.data.DATABASE_ENGINE }}"
+          export DATABASE_NAME="{{ .Data.data.DATABASE_NAME }}"
+          export DATABASE_HOST="{{ .Data.data.DATABASE_HOST }}"
+          export DATABASE_USER="{{ .Data.data.DATABASE_USER }}"
+          export DATABASE_PASSWORD="{{ .Data.data.DATABASE_PASSWORD }}"
+          export DATABASE_PORT="{{ .Data.data.DATABASE_PORT }}"
+          {{- end }}
+    spec:
+      serviceAccountName: django-sa  # must match the role you created in Vault
+      containers:
+      - name: django
+        image: 98543218/todo-web:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+
+        # Source the Vault-injected secret file before starting Django
+        # Replaces the old: command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            . /vault/secrets/config && \
+            python manage.py migrate --noinput && \
+            python manage.py runserver 0.0.0.0:8000
+
+        # REMOVED: envFrom with django-secret and postgres-secret
+        # Vault Agent now handles all secrets via /vault/secrets/config
+
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 5

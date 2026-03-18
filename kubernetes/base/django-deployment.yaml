@@ -20,11 +20,33 @@ spec:
         ports:
         - containerPort: 8000
         command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-        envFrom:
-        - secretRef:
-            name: django-secret
-        - secretRef:
-            name: postgres-secret
+        env:
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: django-secret
+                key: SECRET_KEY
+          - name: DATABASE_NAME
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: POSTGRES_DB
+          - name: DATABASE_USER
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: POSTGRES_USER
+          - name: DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: POSTGRES_PASSWORD
+          - name: DATABASE_HOST
+            value: "postgres-service"
+          - name: DATABASE_PORT
+            value: "5432"
+          - name: DATABASE_ENGINE
+            value: "django.db.backends.postgresql"
         resources:
           requests:
             cpu: "100m"
@@ -44,4 +66,3 @@ spec:
             port: 8000
           initialDelaySeconds: 10
           periodSeconds: 5
-
