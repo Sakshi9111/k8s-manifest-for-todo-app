@@ -30,6 +30,7 @@ resources:
   # - networkpolicy.yaml
   #
   #
-  
+  - label.yaml
+  - require_label.yaml
     #HPA
     #  - HPA.yaml
