@@ -1,0 +1,15 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequiredLabels
+metadata:
+  name: require-owner-label
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"   # ensures it runs after template (if using Argo CD)
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+    namespaces:
+      - "todo-app"   # apply only to your Django app namespace
+  parameters:
+    labels: ["owner"]

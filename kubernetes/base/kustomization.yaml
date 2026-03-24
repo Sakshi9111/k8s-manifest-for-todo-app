@@ -33,5 +33,5 @@ resources:
   #
   #
   - constraint-template.yaml
-  - labels.yaml
+  - constraints.yaml
   
