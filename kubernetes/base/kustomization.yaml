@@ -30,7 +30,8 @@ resources:
   # - networkpolicy.yaml
   #
   #
+  #
+  #
+  - constraint-template.yaml
   - labels.yaml
-  - require_label.yaml
-    #HPA
-    #  - HPA.yaml
+  
