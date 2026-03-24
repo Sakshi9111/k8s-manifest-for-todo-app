@@ -32,6 +32,6 @@ resources:
   #
   #
   #
-  - constraint-template.yaml
-  - constraints.yaml
+  # - constraint-template.yaml
+  # - constraints.yaml
   
