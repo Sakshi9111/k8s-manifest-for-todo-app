@@ -1,0 +1,10 @@
+# kubernetes/base/gatekeeper/kustomization.yaml
+# Sub-kustomization for OPA Gatekeeper resources.
+# Referenced from the parent base/kustomization.yaml.
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - constraint-template.yaml
+  - constraints.yaml

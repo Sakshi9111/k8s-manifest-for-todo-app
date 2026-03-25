@@ -1,5 +1,9 @@
-# namespace.yaml
 apiVersion: v1
 kind: Namespace
 metadata:
   name: todo-app
+  labels:
+    app.kubernetes.io/managed-by: gatekeeper
+    environment: production
+    team: backend
+

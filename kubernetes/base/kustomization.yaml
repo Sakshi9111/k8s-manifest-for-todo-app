@@ -26,12 +26,7 @@ resources:
   - django-service.yaml
   # Optional resources
   - ingress.yaml
-  # - configmap.yaml
-  # - networkpolicy.yaml
-  #
-  #
-  #
-  #
-  # - constraint-template.yaml
-  # - constraints.yaml
-  
+
+
+  #OPA GateKeeper
+  - gatekeeper/
