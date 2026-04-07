@@ -5,10 +5,6 @@ metadata:
   namespace: todo-app
 spec:
   healthCheck:
-    checkIntervalSec: 15
-    timeoutSec: 10
-    healthyThreshold: 1
-    unhealthyThreshold: 2
-    type: HTTP
-    requestPath: /accounts/login/    # ← returns 200, no redirect
+    requestPath: /health/
     port: 8000
+    type: HTTP
