@@ -1,8 +1,4 @@
 # kubernetes/base/gatekeeper/constraints.yaml
-# Binds each ConstraintTemplate to the todo-app namespace.
-# enforcementAction: deny  → hard block at admission time
-# enforcementAction: dryrun → audit only (safe to test with first)
-
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sRequiredResourceLimits
 metadata:
@@ -28,3 +24,28 @@ spec:
         kinds: ["Pod"]
     namespaces:
       - todo-app
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sBlockPrivileged
+metadata:
+  name: block-privileged-containers
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+    namespaces:
+      - production
+      - staging
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequireResourceLimits
+metadata:
+  name: require-limits
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+      - apiGroups: ["apps"]
+        kinds: ["Deployment", "StatefulSet", "DaemonSet"]
