@@ -29,4 +29,4 @@ resources:
   - backendconfig.yaml
 
   #OPA GateKeeper
-  #  - gatekeeper/
+  - gatekeeper/
