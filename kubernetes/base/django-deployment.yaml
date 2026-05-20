@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: django
-        image: 98543218/todo-web:9aa5674
+        image: 98543218/todo-web:8faa565
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
